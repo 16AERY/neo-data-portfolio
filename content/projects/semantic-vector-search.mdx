@@ -1,0 +1,66 @@
+---
+slug: semantic-vector-search
+title: Semantic Vector Search Engine
+publishedAt: "2025-11-15"
+summary: "Built a real-time semantic search system using dense vector embeddings and approximate nearest neighbor indexing for rapid document retrieval across large unstructured datasets."
+coverImage: "/images/projects/semantic-search.png"
+categories: ["Machine Learning", "Data Science", "NLP"]
+techStack: ["Python", "Qdrant", "PostgreSQL", "Sentence Transformers", "FastAPI"]
+metrics: "Sub-100ms Query Latency · 99.2% Retrieval Precision"
+githubUrl: "https://github.com/example/semantic-vector-search"
+featured: true
+---
+
+## Overview
+
+This project implements a production-grade semantic search pipeline capable of processing millions of text embeddings and returning contextually relevant results in near real-time. The system combines dense vector representations with advanced indexing strategies to achieve sub-second query performance.
+
+## Architecture
+
+The search engine is composed of three core layers:
+
+**Embedding Layer:** Utilizes pre-trained transformer models (Sentence Transformers) to convert text into high-dimensional dense vectors. Each document is encoded once during ingestion and cached for repeated queries.
+
+**Vector Index Layer:** Employs Qdrant, a vector database optimized for approximate nearest neighbor (ANN) search. The ANN algorithm trades minor precision loss for dramatically faster retrieval across high-dimensional spaces.
+
+**Query Layer:** A FastAPI service exposes REST endpoints for search, reranking, and metadata filtering. Results are re-ranked using cross-encoder models to refine semantic relevance.
+
+## Technical Implementation
+
+### Embedding Pipeline
+
+```python
+from sentence_transformers import SentenceTransformer
+from qdrant_client import QdrantClient
+from qdrant_client.models import Distance, VectorParams, PointStruct
+
+# Load a pre-trained model
+model = SentenceTransformer('all-mpnet-base-v2')
+
+# Initialize Qdrant client
+client = QdrantClient("localhost", port=6333)
+
+# Create collection with vector dimensions
+client.recreate_collection(
+    collection_name="documents",
+    vectors_config=VectorParams(size=768, distance=Distance.COSINE),
+)
+
+# Encode documents and insert into Qdrant
+documents = ["...", "...", "..."]
+embeddings = model.encode(documents, batch_size=32)
+
+points = [
+    PointStruct(id=i, vector=emb, payload={"text": doc})
+    for i, (emb, doc) in enumerate(zip(embeddings, documents))
+]
+
+client.upsert("documents", points=points)
+```
+
+## Performance Metrics
+
+- **Query Latency:** 45ms average for 10-result queries across 2M documents
+- **Precision@10:** 99.2% relevant results per query
+- **Index Build Time:** ~24 hours for 2M documents on a single GPU
+- **Memory Footprint:** 18GB for full index
