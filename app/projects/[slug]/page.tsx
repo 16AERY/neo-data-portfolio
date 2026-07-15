@@ -80,7 +80,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         const { frontmatter, content } = await getProjectBySlug(slug);
 
         return (
-            <main style={{ minHeight: '100vh', backgroundColor: 'hsl(var(--background))', color: 'hsl(var(--foreground))', paddingTop: '120px', paddingBottom: '3rem' }}>
+            <main style={{ minHeight: '100vh', backgroundColor: 'transparent', color: 'hsl(var(--foreground))', paddingTop: '120px', paddingBottom: '3rem' }}>
                 <div style={{ backgroundColor: 'hsl(var(--card))', borderBottom: `2.5px solid hsl(var(--border))`, padding: '3rem 1.5rem' }}>
                     <div style={{ maxWidth: '900px', margin: '0 auto' }}>
                         <div style={{ marginBottom: '2rem' }}>

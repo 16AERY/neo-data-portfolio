@@ -6,7 +6,7 @@ export function Footer() {
             style={{
                 borderTop: `2.5px solid hsl(var(--foreground))`,
                 boxShadow: 'var(--shadow-neo)',
-                backgroundColor: 'hsl(var(--background))',
+                backgroundColor: 'transparent',
                 padding: '2rem 1rem',
             }}
         >

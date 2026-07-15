@@ -17,12 +17,11 @@ export default function ProjectsPage() {
         <main
             style={{
                 minHeight: '100vh',
-                backgroundColor: 'hsl(var(--background))',
+                backgroundColor: 'transparent',
                 paddingTop: '120px',
                 paddingBottom: '3rem',
             }}
         >
-            {/* Header Section */}
             <div
                 style={{
                     backgroundColor: 'hsl(var(--card))',
@@ -59,7 +58,6 @@ export default function ProjectsPage() {
                 </div>
             </div>
 
-            {/* Projects Grid with Suspense Boundary */}
             <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
                 <Suspense fallback={<ProjectsLoadingFallback />}>
                     <ProjectsContent />
@@ -72,13 +70,7 @@ export default function ProjectsPage() {
 function ProjectsLoadingFallback() {
     return (
         <div style={{ textAlign: 'center', padding: '4rem 2rem' }}>
-            <p
-                style={{
-                    fontSize: '1.1rem',
-                    color: 'hsl(var(--foreground))',
-                    opacity: 0.6,
-                }}
-            >
+            <p style={{ fontSize: '1.1rem', color: 'hsl(var(--foreground))', opacity: 0.6 }}>
                 Loading projects...
             </p>
         </div>

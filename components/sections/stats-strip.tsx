@@ -11,7 +11,7 @@ export function StatsStrip() {
             style={{
                 paddingTop: '4rem',
                 paddingBottom: '4rem',
-                backgroundColor: 'hsl(var(--background))',
+                backgroundColor: 'transparent',
             }}
         >
             <div className="max-w-7xl mx-auto px-4">

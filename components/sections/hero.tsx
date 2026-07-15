@@ -6,7 +6,7 @@ export function Hero() {
             style={{
                 paddingTop: '6rem',
                 paddingBottom: '6rem',
-                backgroundColor: 'hsl(var(--background))',
+                backgroundColor: 'transparent',
                 textAlign: 'center',
             }}
         >

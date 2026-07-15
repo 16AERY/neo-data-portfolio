@@ -2,11 +2,19 @@
 slug: etl-orchestration
 title: Distributed ETL Pipeline Orchestration System
 publishedAt: "2025-10-22"
-summary: "Engineered a fault-tolerant ETL framework orchestrating multi-stage data pipelines across heterogeneous data sources with automatic recovery, monitoring, and audit logging."
-coverImage: "/images/projects/etl-pipeline.png"
-categories: ["Data Engineering", "ETL", "Business Intelligence"]
-techStack: ["Apache Airflow", "PostgreSQL", "Python", "Pandas", "dbt"]
-metrics: "Processing 500GB+ Daily · 99.9% Pipeline Success Rate"
+summary: Engineered a fault-tolerant ETL framework orchestrating multi-stage data pipelines across heterogeneous data sources with automatic recovery, monitoring, and audit logging.
+coverImage: /images/projects/etl-pipeline.png
+categories:
+  - Data Engineering
+  - ETL
+  - Business Intelligence
+techStack:
+  - Apache Airflow
+  - PostgreSQL
+  - Python
+  - Pandas
+  - dbt
+metrics: Processing 500GB+ Daily • 99.9% Pipeline Success Rate
 featured: false
 ---
 
@@ -47,13 +55,10 @@ dag = DAG(
 )
 
 def extract_api_data(**context):
-    """Extract data from upstream API and stage in S3."""
     import requests
-    
     endpoint = "https://api.example.com/events"
     response = requests.get(endpoint)
     data = response.json()
-    
     return {'records_extracted': len(data)}
 
 extract_task = PythonOperator(
@@ -67,5 +72,5 @@ extract_task = PythonOperator(
 
 - **Daily Data Volume:** 500GB+ ingested and transformed
 - **Pipeline Reliability:** 99.9% success rate
-- **Mean Time to Recovery:** <15 minutes for typical failures
+- **Mean Time to Recovery:** Less than 15 minutes for typical failures
 - **End-to-End Latency:** 2–3 hours from data capture to warehouse

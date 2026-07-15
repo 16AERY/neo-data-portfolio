@@ -1,19 +1,25 @@
 'use client';
 
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { ThemeToggle } from './theme-toggle';
 
 export function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
+    const pathname = usePathname();
 
-    // Navigation links in Title Case per spec
     const navLinks = [
         { label: 'Home', href: '/' },
         { label: 'Projects', href: '/projects' },
         { label: 'Beyond Tech', href: '#beyond-tech' },
         { label: 'Contact', href: '#contact' },
     ];
+
+    const isActive = (href: string) => {
+        if (href === '/') return pathname === '/';
+        return pathname.startsWith(href);
+    };
 
     return (
         <nav
@@ -22,109 +28,197 @@ export function Navbar() {
                 top: 0,
                 zIndex: 50,
                 width: '100%',
-                backgroundColor: 'hsl(var(--background))',
-                borderBottom: `2.5px solid hsl(var(--foreground))`,
-                boxShadow: 'var(--shadow-neo)',
+                backgroundColor: '#1A1A1A',
             }}
-            className="w-full"
         >
-            <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-                {/* Logo/Home Link */}
+            <style>{`
+                .nav-desktop-links { display: none; }
+                .nav-mobile-toggle { display: flex; }
+                .nav-link-pill { transition: transform 0.15s ease, background-color 0.15s ease; }
+                .nav-link-pill:hover { transform: scale(1.06); }
+                .nav-link-pill:active { transform: scale(0.96); }
+                .nav-icon-btn { transition: transform 0.15s ease, background-color 0.15s ease; }
+                .nav-icon-btn:hover { transform: scale(1.08) translateY(-1px); background-color: rgba(255, 255, 255, 0.1); }
+                @media (min-width: 768px) {
+                  .nav-desktop-links { display: flex; }
+                  .nav-mobile-toggle { display: none; }
+                }
+            `}</style>
+
+            <div
+                style={{
+                    maxWidth: '1200px',
+                    margin: '0 auto',
+                    padding: '1rem 1.5rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: '1.5rem',
+                }}
+            >
                 <Link
                     href="/"
-                    className="font-heading font-bold text-lg"
-                    style={{ color: 'hsl(var(--foreground))' }}
-                >
-                    ND
-                </Link>
-
-                {/* Desktop Nav Links */}
-                <div className="hidden md:flex gap-8 items-center">
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.href}
-                            href={link.href}
-                            className="font-heading text-sm font-medium transition-opacity hover:opacity-70"
-                            style={{ color: 'hsl(var(--foreground))' }}
-                        >
-                            {link.label}
-                        </Link>
-                    ))}
-                </div>
-
-                {/* Right: Theme Toggle + Mobile Menu Button */}
-                <div className="flex items-center gap-6">
-                    <ThemeToggle />
-
-                    {/* Mobile Menu Button - Fixed spacing */}
-                    <button
-                        onClick={() => setMenuOpen(!menuOpen)}
-                        className="md:hidden p-2 border-2"
-                        style={{
-                            borderColor: 'hsl(var(--foreground))',
-                            backgroundColor: 'transparent',
-                            color: 'hsl(var(--foreground))',
-                            minWidth: '44px',
-                            minHeight: '44px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                        }}
-                        aria-label="Toggle menu"
-                    >
-                        {menuOpen ? (
-                            <svg
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                            >
-                                <line x1="18" y1="6" x2="6" y2="18" />
-                                <line x1="6" y1="6" x2="18" y2="18" />
-                            </svg>
-                        ) : (
-                            <svg
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                            >
-                                <line x1="3" y1="6" x2="21" y2="6" />
-                                <line x1="3" y1="12" x2="21" y2="12" />
-                                <line x1="3" y1="18" x2="21" y2="18" />
-                            </svg>
-                        )}
-                    </button>
-                </div>
-            </div>
-
-            {/* Mobile Menu */}
-            {menuOpen && (
-                <div
-                    className="md:hidden border-t-2"
                     style={{
-                        borderColor: 'hsl(var(--foreground))',
-                        backgroundColor: 'hsl(var(--background))',
-                        padding: '1rem',
+                        fontFamily: 'var(--font-space-grotesk)',
+                        fontWeight: 700,
+                        fontSize: '1.25rem',
+                        color: '#FFFFFF',
+                        textDecoration: 'none',
+                        letterSpacing: '-0.02em',
+                        whiteSpace: 'nowrap',
                     }}
                 >
-                    <div className="flex flex-col gap-4">
-                        {navLinks.map((link) => (
+                    Neo<span style={{ color: '#FF4911' }}>Data</span>
+                </Link>
+
+                <div
+                    className="nav-desktop-links"
+                    style={{
+                        alignItems: 'center',
+                        gap: '0.25rem',
+                        backgroundColor: 'rgba(255, 255, 255, 0.06)',
+                        border: '2px solid rgba(255, 255, 255, 0.15)',
+                        borderRadius: '999px',
+                        padding: '0.35rem',
+                        flexShrink: 0,
+                    }}
+                >
+                    {navLinks.map((link) => {
+                        const active = isActive(link.href);
+                        return (
                             <Link
                                 key={link.href}
                                 href={link.href}
-                                className="font-heading text-sm font-medium"
-                                style={{ color: 'hsl(var(--foreground))' }}
-                                onClick={() => setMenuOpen(false)}
+                                className="nav-link-pill"
+                                style={{
+                                    fontFamily: 'var(--font-space-grotesk)',
+                                    fontSize: '0.9rem',
+                                    fontWeight: 500,
+                                    padding: '0.5rem 1.1rem',
+                                    borderRadius: '999px',
+                                    textDecoration: 'none',
+                                    whiteSpace: 'nowrap',
+                                    backgroundColor: active ? '#FF4911' : 'transparent',
+                                    color: active ? '#FFFFFF' : '#E5E5E5',
+                                }}
                             >
                                 {link.label}
                             </Link>
-                        ))}
-                    </div>
+                        );
+                    })}
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
+                    {/* FIXED: Added missing <a> opening tag */}
+                    <a
+                        href="https://github.com/yourusername"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="nav-icon-btn"
+                        aria-label="GitHub"
+                        style={{
+                            width: '38px',
+                            height: '38px',
+                            border: '1.5px solid rgba(255, 255, 255, 0.15)',
+                            borderRadius: '999px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            color: '#FFFFFF',
+                            fontFamily: 'var(--font-space-grotesk)',
+                            fontSize: '0.75rem',
+                            fontWeight: 700,
+                            textDecoration: 'none',
+                        }}
+                    >
+                        GH
+                    </a>
+
+                    {/* FIXED: Added missing <a> opening tag */}
+                    <a
+                        href="https://linkedin.com/in/yourusername"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="nav-icon-btn"
+                        aria-label="LinkedIn"
+                        style={{
+                            width: '38px',
+                            height: '38px',
+                            border: '1.5px solid rgba(255, 255, 255, 0.15)',
+                            borderRadius: '999px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            color: '#FFFFFF',
+                            fontFamily: 'var(--font-space-grotesk)',
+                            fontSize: '0.75rem',
+                            fontWeight: 700,
+                            textDecoration: 'none',
+                        }}
+                    >
+                        in
+                    </a>
+
+                    <ThemeToggle />
+
+                    <button
+                        onClick={() => setMenuOpen(!menuOpen)}
+                        className="nav-mobile-toggle nav-icon-btn"
+                        aria-label="Toggle menu"
+                        style={{
+                            width: '42px',
+                            height: '42px',
+                            border: '1.5px solid rgba(255, 255, 255, 0.15)',
+                            borderRadius: '999px',
+                            backgroundColor: 'transparent',
+                            color: '#FFFFFF',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            cursor: 'pointer',
+                            fontSize: '1.1rem',
+                        }}
+                    >
+                        {menuOpen ? 'X' : '≡'}
+                    </button>
+                </div>
+            </div> {/* FIXED: Mismatched tag corrected here */}
+
+            {menuOpen && (
+                <div
+                    className="nav-mobile-toggle"
+                    style={{
+                        borderTop: '1.5px solid rgba(255, 255, 255, 0.15)',
+                        backgroundColor: '#1A1A1A',
+                        padding: '1rem 1.5rem',
+                        flexDirection: 'column',
+                        gap: '0.5rem',
+                    }}
+                >
+                    {navLinks.map((link) => {
+                        const active = isActive(link.href);
+                        return (
+                            <Link
+                                key={link.href}
+                                href={link.href}
+                                onClick={() => setMenuOpen(false)}
+                                className="nav-link-pill"
+                                style={{
+                                    fontFamily: 'var(--font-space-grotesk)',
+                                    fontSize: '1rem',
+                                    fontWeight: 500,
+                                    padding: '0.75rem 1.25rem',
+                                    borderRadius: '999px',
+                                    textDecoration: 'none',
+                                    backgroundColor: active ? '#FF4911' : 'rgba(255, 255, 255, 0.06)',
+                                    color: active ? '#FFFFFF' : '#E5E5E5',
+                                    border: '1.5px solid rgba(255, 255, 255, 0.15)',
+                                    display: 'block',
+                                }}
+                            >
+                                {link.label}
+                            </Link>
+                        );
+                    })}
                 </div>
             )}
         </nav>
