@@ -2,7 +2,6 @@ import type { Metadata } from "next"
 import { Space_Grotesk } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { ThemeToggle } from "@/components/layout/theme-toggle"
 import { Navbar } from "@/components/layout/navbar"
 
 const spaceGrotesk = Space_Grotesk({
@@ -38,7 +37,6 @@ export default function RootLayout({
         <ThemeProvider>
           <Navbar />
           {children}
-          <ThemeToggle />
         </ThemeProvider>
       </body>
     </html>

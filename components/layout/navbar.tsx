@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { ThemeToggle } from './theme-toggle';
@@ -111,7 +112,7 @@ export function Navbar() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
                     {/* FIXED: Added missing <a> opening tag */}
                     <a
-                        href="https://github.com/yourusername"
+                        href="https://github.com/16AERY"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="nav-icon-btn"
@@ -131,12 +132,18 @@ export function Navbar() {
                             textDecoration: 'none',
                         }}
                     >
-                        GH
+                        <img
+                            src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/github.svg"
+                            alt="GitHub"
+                            width={18}
+                            height={18}
+                            style={{ filter: 'invert(1)' }}
+                        />
                     </a>
 
                     {/* FIXED: Added missing <a> opening tag */}
                     <a
-                        href="https://linkedin.com/in/yourusername"
+                        href="https://www.linkedin.com/in/parth-gupta-3a44b327b/"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="nav-icon-btn"
@@ -156,7 +163,13 @@ export function Navbar() {
                             textDecoration: 'none',
                         }}
                     >
-                        in
+                        <img
+                            src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/linkedin.svg"
+                            alt="LinkedIn"
+                            width={18}
+                            height={18}
+                            style={{ filter: 'invert(1)' }}
+                        />
                     </a>
 
                     <ThemeToggle />

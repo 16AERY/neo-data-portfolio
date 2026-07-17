@@ -15,7 +15,7 @@ export function Hero() {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          padding: 1rem 2rem;
+          padding: 0.9rem 2rem;
           border-radius: 999px;
           font-family: var(--font-space-grotesk);
           font-weight: 700;
@@ -24,7 +24,7 @@ export function Hero() {
           cursor: pointer;
           transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
           text-decoration: none;
-          display: inline-flex;
+          white-space: nowrap;
         }
 
         .hero-btn-primary {
@@ -55,7 +55,7 @@ export function Hero() {
         }
       `}</style>
 
-            <div className="max-w-2xl mx-auto px-4">
+            <div style={{ maxWidth: '640px', margin: '0 auto', padding: '0 1.5rem' }}>
                 {/* Main Heading */}
                 <h1
                     className="font-heading font-bold mb-6"
@@ -76,32 +76,19 @@ export function Hero() {
                         color: 'hsl(var(--foreground))',
                         opacity: 0.85,
                         lineHeight: '1.6',
-                        fontWeight: 500,
                     }}
                 >
-                    AI/ML Engineer focused on{' '}
-                    <span style={{ fontStyle: 'italic' }}>retrieval systems</span> and
-                    production pipelines that scale. Turning research into robust,
-                    deployable solutions.
+                    We help engineering teams operationalize and scale machine learning systems with production-grade infrastructure.
                 </p>
 
-                {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    {/* Primary CTA */}
-                    <Link
-                        href="/projects"
-                        className="hero-btn hero-btn-primary"
-                    >
+                {/* CTA Action Buttons */}
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <Link href="/projects" className="hero-btn hero-btn-primary">
                         View Projects
                     </Link>
-
-                    {/* Secondary CTA */}
-                    <a
-                        href="mailto:hello@example.com"
-                        className="hero-btn hero-btn-secondary"
-                    >
-                        Get In Touch
-                    </a>
+                    <Link href="/contact" className="hero-btn hero-btn-secondary">
+                        Get in Touch
+                    </Link>
                 </div>
             </div>
         </section>

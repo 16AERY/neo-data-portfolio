@@ -17,7 +17,6 @@
     --ring: 0 0% 9%;
     --radius: 0.75rem;
 
-    /* Neo-brutalist additions */
     --card-background: 0 0% 100%;
     --shadow-neo: 4px 4px 0px 0px hsl(0 0% 9%);
   }
@@ -35,9 +34,16 @@
     --input: 0 0% 98%;
     --ring: 0 0% 98%;
 
-    /* Neo-brutalist additions for dark mode */
     --card-background: 0 0% 14%;
     --shadow-neo: 4px 4px 0px 0px hsl(0 0% 98%);
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
   }
 
   body {
