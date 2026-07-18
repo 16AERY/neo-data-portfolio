@@ -8,7 +8,6 @@ export function ThemeToggle() {
 
     useEffect(() => {
         setMounted(true);
-        // Check initial theme
         const isDarkMode = document.documentElement.classList.contains('dark');
         setIsDark(isDarkMode);
     }, []);
@@ -35,14 +34,14 @@ export function ThemeToggle() {
     return (
         <button
             onClick={toggleTheme}
-            className="p-2 border-2"
+            className="nav-icon-btn"
             style={{
-                borderColor: 'hsl(var(--foreground))',
+                border: '1.5px solid rgba(255, 255, 255, 0.15)',
                 backgroundColor: 'transparent',
-                color: 'hsl(var(--foreground))',
+                color: '#FFFFFF',
                 borderRadius: '999px',
-                minWidth: '44px',
-                minHeight: '44px',
+                width: '38px',
+                height: '38px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -52,8 +51,8 @@ export function ThemeToggle() {
         >
             {isDark ? (
                 <svg
-                    width="20"
-                    height="20"
+                    width="18"
+                    height="18"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -71,8 +70,8 @@ export function ThemeToggle() {
                 </svg>
             ) : (
                 <svg
-                    width="20"
-                    height="20"
+                    width="18"
+                    height="18"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"

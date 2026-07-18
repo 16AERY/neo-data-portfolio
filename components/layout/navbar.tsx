@@ -13,8 +13,8 @@ export function Navbar() {
     const navLinks = [
         { label: 'Home', href: '/' },
         { label: 'Projects', href: '/projects' },
-        { label: 'Beyond Tech', href: '#beyond-tech' },
-        { label: 'Contact', href: '#contact' },
+        { label: 'Beyond Tech', href: '/beyond-tech' },
+        { label: 'Contact', href: '/contact' },
     ];
 
     const isActive = (href: string) => {

@@ -18,7 +18,7 @@ export default function ProjectsPage() {
             style={{
                 minHeight: '100vh',
                 backgroundColor: 'transparent',
-                paddingTop: '120px',
+                paddingTop: '0px',
                 paddingBottom: '3rem',
             }}
         >

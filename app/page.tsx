@@ -1,8 +1,7 @@
 import { Footer } from '@/components/layout/footer';
 import { Hero } from '@/components/sections/hero';
-import { StatsStrip } from '@/components/sections/stats-strip';
-import { BentoGrid } from '@/components/sections/bento-grid';
-import { EducationTimeline } from '@/components/sections/education-timeline';
+import { About } from '@/components/sections/about';
+import { Experience } from '@/components/sections/experience';
 
 export default function Home() {
   return (
@@ -16,9 +15,8 @@ export default function Home() {
     >
       <main className="w-full">
         <Hero />
-        <StatsStrip />
-        <BentoGrid />
-        <EducationTimeline />
+        <About />
+        <Experience />
       </main>
 
       <Footer />
